@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 module.exports = {
   mode: 'production',
   entry: {
@@ -61,6 +62,7 @@ module.exports = {
     ]
   },
   plugins: [
+
     new MiniCssExtractPlugin({
       filename: "[name]-[contenthash:8].css"
     }),
@@ -68,10 +70,11 @@ module.exports = {
       assetNameRegExp: /\.css$/g,
       cssProcessor: require('cssnano')
     }),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname,'./src/search.html'),
+      template: path.join(__dirname, './src/search.html'),
       filename: 'search.html',
-      chunks: ['search','index'],
+      chunks: ['search', 'index'],
       inject: true,
       minify: {
         html5: true,
@@ -83,7 +86,7 @@ module.exports = {
       }
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname,'./src/search.html'),
+      template: path.join(__dirname, './src/search.html'),
       filename: 'index.html',
       chunks: ['index'],
       inject: true,
@@ -91,7 +94,7 @@ module.exports = {
         html5: true,
         collapseWhitespace: true,
         preserveLineBreaks: false,
-        minifyCSS:true,
+        minifyCSS: true,
         minifyJS: true,
         removeComments: false
       }

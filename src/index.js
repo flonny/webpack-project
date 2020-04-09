@@ -1,4 +1,4 @@
-document.write('hello world index')
+document.write('hello world indexasdasd')
 class Rectangle {
 
   constructor() {    
