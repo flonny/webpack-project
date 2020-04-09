@@ -1,4 +1,4 @@
-document.write('hello world')
+document.write('hello world index')
 class Rectangle {
 
   constructor() {    

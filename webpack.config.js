@@ -2,6 +2,12 @@ const path = require('path');
 
 module.exports = {
   mode: 'production',
+  watch: true,
+  watchOptions: {
+    ignored: '/node_modules/',
+    aggregateTimeout: 300,
+    poll: 500
+  },
   entry: {
     index: './src/index.js',
     search: './src/search.js'
