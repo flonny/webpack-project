@@ -1,13 +1,8 @@
 const path = require('path');
+const webpack = require('webpack')
 
 module.exports = {
-  mode: 'production',
-  watch: true,
-  watchOptions: {
-    ignored: '/node_modules/',
-    aggregateTimeout: 300,
-    poll: 500
-  },
+  mode: 'development',
   entry: {
     index: './src/index.js',
     search: './src/search.js'
@@ -57,5 +52,12 @@ module.exports = {
         ]
       }
     ]
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  devServer: {
+    contentBase: './dist',
+    port: 3000
   }
 }

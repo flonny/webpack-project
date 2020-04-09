@@ -8,7 +8,7 @@ import cook from './assets/cook.png'
 export default function Search() {
   return (
     <div className="search">
-      search
+      search page
       <div>
         <img src={cooking}/>
         <img src={cook}/>
