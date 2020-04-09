@@ -7,7 +7,7 @@ module.exports = {
     search: './src/search.js'
   },
   output: {
-    path: path.join(__dirname,'dist'),
+    path: path.join(__dirname, 'dist'),
     filename: "[name].js"
   },
   module: {
@@ -16,6 +16,13 @@ module.exports = {
         test: /\.js$/,
         use: [
           'babel-loader'
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          "css-loader"
         ]
       }
     ]
