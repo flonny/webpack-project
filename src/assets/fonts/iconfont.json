@@ -1,0 +1,37 @@
+{
+  "id": "1725892",
+  "name": "base",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "221461",
+      "name": "browse",
+      "font_class": "browse",
+      "unicode": "e6e6",
+      "unicode_decimal": 59110
+    },
+    {
+      "icon_id": "4354835",
+      "name": "闭眼睛",
+      "font_class": "biyanjing",
+      "unicode": "e901",
+      "unicode_decimal": 59649
+    },
+    {
+      "icon_id": "8776631",
+      "name": "view",
+      "font_class": "icon-test",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "8776676",
+      "name": "view_off",
+      "font_class": "icon-test1",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    }
+  ]
+}
