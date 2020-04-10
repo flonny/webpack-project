@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import './style/search.css'
-import './style/search.less'
-import './assets/fonts/iconfont.css'
-import cooking from './assets/cooking.png'
-import cook from './assets/cook.png'
+import '../style/search.css'
+import '../style/search.less'
+import '../assets/fonts/iconfont.css'
+import cooking from '../assets/cooking.png'
+import cook from '../assets/cook.png'
 export default function Search() {
   return (
     <div className="search">

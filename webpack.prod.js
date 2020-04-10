@@ -1,14 +1,47 @@
 const path = require('path');
+const glob = require("glob")
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+function getEntryConf() {
+  const entryFiles = glob.sync(path.join(__dirname, './src/*/index.js'))
+  const dirnameReg = /src\/(.*)\/index\.js$/
+  return entryFiles.reduce((entryObj, file) => {
+    const fileMatch = file.match(dirnameReg)
+    const entryName = fileMatch[1]
+    if (!entryObj.entry) {
+      entryObj.entry = {}
+    }
+    if (!entryObj.htmlPlugins) {
+      entryObj.htmlPlugins = []
+    }
+    if (!entryObj.entry[entryName]) {
+      entryObj.entry[entryName] = `./src/${entryName}/index.js`
+    }
+    entryObj.htmlPlugins.push(
+      new HtmlWebpackPlugin({
+        template: path.join(__dirname, `./src/${entryName}/index.html`),
+        filename: `${entryName}.html`,
+        chunks: [entryName],
+        inject: true,
+        minify: {
+          html5: true,
+          collapseWhitespace: true,
+          preserveLineBreaks: false,
+          minifyCSS: true,
+          minifyJS: true,
+          removeComments: false
+        }
+      })
+    )
+    return entryObj
+  }, {})
+}
+const entryConf = getEntryConf()
 module.exports = {
   mode: 'production',
-  entry: {
-    index: './src/index.js',
-    search: './src/search.js'
-  },
+  entry: entryConf.entry,
   output: {
     path: path.join(__dirname, 'dist'),
     filename: "[name]_[chunkhash:8].js"
@@ -50,7 +83,7 @@ module.exports = {
           {
             loader: 'px2rem-loader',
             options: {
-              remUit:75,
+              remUit: 75,
               remPrecision: 8
             }
           }
@@ -91,33 +124,6 @@ module.exports = {
       cssProcessor: require('cssnano')
     }),
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, './src/search.html'),
-      filename: 'search.html',
-      chunks: ['search', 'index'],
-      inject: true,
-      minify: {
-        html5: true,
-        collapseWhitespace: true,
-        preserveLineBreaks: false,
-        minifyCSS: true,
-        minifyJS: true,
-        removeComments: false
-      }
-    }),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, './src/search.html'),
-      filename: 'index.html',
-      chunks: ['index'],
-      inject: true,
-      minify: {
-        html5: true,
-        collapseWhitespace: true,
-        preserveLineBreaks: false,
-        minifyCSS: true,
-        minifyJS: true,
-        removeComments: false
-      }
-    }),
+    ...entryConf.htmlPlugins
   ]
 }
