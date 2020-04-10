@@ -1,6 +1,5 @@
 document.write('hello world indexasdasd')
 class Rectangle {
-
   constructor() {    
     this.height = 1;
     this.width = 2;
