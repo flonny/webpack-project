@@ -1,12 +1,18 @@
-document.write('hello world indexasdasd')
-class Rectangle {
-  constructor() {    
-    this.height = 1;
-    this.width = 2;
+// const baseNumberReg =/^(\+|\-)?\d+(\.\d+(e\d+)?)?/
+const baseNumberReg = /^(\+|\-)?0|(^[1-9][0-9]+?(\.[0-9]+(e(\+|\-)?[0-9]+)?))?/
+const testArr = [ '0','+0', '-0', '1', '2', '3', '4.', '4.3', '4.32123123']
+function testReg(reg, arr = testArr, ) {
+  const isNumber = (num => {
+    if (!reg.test(num)) {
+      console.log(num)
+    }
+    return reg.test(num)
+  })
+  if (arr.every(isNumber)) {
+    console.log('success')
+    return true
   }
-  seek() {
-    return this.height + this.width
-  }
+  return false
+
 }
-const a = new Rectangle()
-console.log(a.seek())
+testReg(baseNumberReg)
