@@ -1,6 +1,6 @@
 // const baseNumberReg =/^(\+|\-)?\d+(\.\d+(e\d+)?)?/
-const baseNumberReg = /^(\+|\-)?0|(^[1-9][0-9]+?(\.[0-9]+(e(\+|\-)?[0-9]+)?))?/
-const testArr = [ '0','+0', '-0', '1', '2', '3', '4.', '4.3', '4.32123123']
+const baseNumberReg = /^(\+|\-)?0|(^([1-9]|\.)[0-9]+?(\.[0-9]+(e(\+|\-)?[0-9]+)?))?/
+const testArr = [ '0','+0', '-0', '1', '2', '3', '4.', '4.3', '4.32123123','.1231',1212e12]
 function testReg(reg, arr = testArr, ) {
   const isNumber = (num => {
     if (!reg.test(num)) {
