@@ -1,9 +1,17 @@
-import './index.css'
-document.write('hello world')
-class writeHello {
-  wirte() {
-    document.write('hello')
-  }
+import React, { Component } from 'react'
+import ReactDom from 'react-dom'
+import './search.less'
+import './font/iconfont.css'
+import aturo from './8.jpg'
+import UploadFile from './components/UploadFile'
+function App() {
+  return (
+    <div>
+      <h1>Hello Clock</h1>
+      <div>
+        <UploadFile />
+      </div>
+    </div>
+  )
 }
-const WirteHe = new writeHello()
-WirteHe.wirte()
+ReactDom.render(<App />, document.getElementById('root'))
