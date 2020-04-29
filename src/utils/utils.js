@@ -1,39 +1,71 @@
 export function converStringToNumber(string, x = 10) {
-  var chars = string.split('');
+  let numberString = string
+  if(string.indexOf('e') !== -1&&x!=10) {
+    numberString = ''+converStringToNumber(string,10)
+    console.log('numberString',numberString)
+  }
+  const charStr = "0123456789abcdef";
+  var chars = numberString.split("");
   let number = 0;
-  let i = 0
-  while (i < chars.length && chars[i] != '.') {
-    number = number * x
-    number += chars[i].codePointAt(0) - '0'.codePointAt(0);
-    i++
+  let i = 0;
+  while (i < chars.length && chars[i] != "." && chars[i] !== "e") {
+    number = number * x;
+    number += charStr.indexOf(chars[i]);
+    i++;
   }
-  if (chars[i] == '.') {
-    i++
+  if (chars[i] === "e") {
+    let j = 0;
+    i++;
+    while (i < chars.length) {
+      j = j * x;
+      j += charStr.indexOf(chars[i]);
+      i++;
+    }
+    while (j > 0) {
+      number *= 10;
+      j--;
+    }
   }
-
-  let fraction = 1
-  while (i < chars.length) {
-    fraction = fraction / x
-    number += (chars[i].codePointAt(0) - '0'.codePointAt(0)) * fraction;
-    i++
+  if (chars[i] === "."&& chars[i] !== "e") {
+    i++;
+    let fraction = 1;
+    let dividend = x;
+    while (i < chars.length) {
+      number += charStr.indexOf(chars[i]) * (fraction / dividend);
+      dividend = x * dividend;
+      i++;
+    }
   }
-  return number
+  if (chars[i] === "e") {
+    let j = 0;
+    i++;
+    while (i < chars.length) {
+      j = j * x;
+      j += charStr.indexOf(chars[i]);
+      i++;
+    }
+    while (j > 0) {
+      number *= 10;
+      j--;
+    }
+  }
+  return number;
 }
 export function converNumberToString(number, x = 10) {
   var integer = Math.floor(number);
-  var fraction = number%1
-  let string = ''
+  var fraction = number % 1;
+  let string = "";
   while (integer > 0) {
-    string = integer % x + string
-    integer = Math.floor(integer / x)
+    string = (integer % x) + string;
+    integer = Math.floor(integer / x);
   }
   if (fraction > 0) {
-    string += '.'
+    string += ".";
   }
-  while (fraction !== Math.floor(fraction) ) {
+  while (fraction !== Math.floor(fraction)) {
     // debugger;
-    fraction = fraction * x
-    string += Math.floor(fraction%10)+''
+    fraction = fraction * x;
+    string += Math.floor(fraction % 10) + "";
   }
-  return string
+  return string;
 }

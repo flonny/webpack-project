@@ -1,19 +1,12 @@
 import React, { Component } from 'react'
 import ReactDom from 'react-dom'
-import './search.less'
-import './font/iconfont.css'
-import aturo from './8.jpg'
-import UploadFile from './components/UploadFile'
 import {converStringToNumber,converNumberToString} from './utils/utils'
 function App() {
-  // console.log(converStringToNumber('100.23231213123'))
-  console.log(converNumberToString(1.25))
+  const string =  '1e2'
+  console.log(string,converStringToNumber(string,2))
+  console.log(converNumberToString(converStringToNumber(string,10),10))
   return (
     <div>
-      <h1>Hello Clock</h1>
-      <div>
-        <UploadFile />
-      </div>
     </div>
   )
 }
